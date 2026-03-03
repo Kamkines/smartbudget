@@ -1,16 +1,17 @@
 from django.db import models
 
-class User(models.Model):
+class User(models.Model): #Наследуем от базового класса
     telegram_id = models.BigIntegerField(unique=True)
     username = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
-    class Meta:
+    class Meta: # настройка модели
         db_table = "users"
-        managed = False  # Django не управляет этой таблицей, она уже есть
+        managed = False  # Django не управляет этой таблицей, она уже в БД и чисто все данные берутся из БД
+        
 
-    def __str__(self):
+    def __str__(self): # отображать объект в виде строки 
         return self.username
 
 

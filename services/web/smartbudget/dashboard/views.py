@@ -3,10 +3,12 @@ import json
 from django.db.models import Sum, Count
 from .models import Transaction, Category, User
 
+# параметр request - содержит всё о входящем запросе: кто зашёл, какой метод (GET/POST), cookies и т.д. Django передаёт его автоматически в каждую view.
+
 def index(request):
-    transactions = Transaction.objects.select_related("category", "user").order_by("-created_at")[:20]
+    transactions = Transaction.objects.select_related("category", "user").order_by("-created_at")[:20] # objects - через это делаем все запросы к БД (менелжер запросов)
     
-    stats = Transaction.objects.values(
+    stats = Transaction.objects.values( 
         "category__name",
         "category__emoji"
     ).annotate(

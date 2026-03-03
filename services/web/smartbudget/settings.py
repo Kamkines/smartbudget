@@ -21,7 +21,7 @@ DEBUG = settings.debug
 
 ALLOWED_HOSTS = ["*"]
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [ # какие приложения подключены
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     "smartbudget.dashboard",
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE = [  # цепочка обработчиков запроса
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -44,7 +44,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "smartbudget.urls"
 
-TEMPLATES = [
+TEMPLATES = [ # где искать HTML шаблоны
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "smartbudget" / "templates"],
@@ -60,7 +60,7 @@ TEMPLATES = [
     },
 ]
 
-DATABASES = {
+DATABASES = { # подключение к БД
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": settings.postgres_db,
@@ -71,7 +71,7 @@ DATABASES = {
     }
 }
 
-STATIC_URL = "/static/"
+STATIC_URL = "/static/" # где лежат CSS/JS файлы
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 

@@ -11,3 +11,11 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# manage.py - точка входа, команды django - как package.json scripts
+# settings.py - конфиг всего проекта (БД, приложения, шаблоны)
+# urls.py - роутинг, какой URL → какая view как роутер в FastAPI)
+# wsgi.py - точка входа для сервера (как main.py в FastAPI)
+# models.py - описание таблиц БД (как SQLAlchemy модели)
+# views.py - логика страниц (как эндпоинты в FastAPI)
+# index.html - HTML шаблон с данными
