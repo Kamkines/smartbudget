@@ -1,0 +1,58 @@
+version: '3.9'
+
+# restart: always - нужен для того, чтобы докер автоматически переподнимал контейнер, если он упал
+
+services:
+
+  # База данных PostgreSQL
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+  # Redis
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    restart: always
+
+  # FastAPI
+  api:
+    build: ./services/api
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    restart: always
+
+  # Django
+  web:
+    build: ./services/web
+    env_file: .env
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+      - redis
+    restart: always
+
+  # Telegram Bot
+  bot:
+    build: ./services/bot
+    env_file: .env
+    depends_on:
+      - api
+    restart: always
+
+volumes:
+  postgres_data:
